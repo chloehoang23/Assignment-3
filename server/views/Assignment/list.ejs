@@ -1,0 +1,45 @@
+<% include ../Partials/header.ejs %>
+<% include ../Partials/main_nav.ejs %>
+<main class="container">
+    <div class="row">
+        <div class="offset-md-1 col-md-10">
+            <h3><%= title %></h3>
+            <a href="/tracker/add" class="btn btn-primary" role="button">
+                <i class="fas fa-plus-circle"></i>Add Assignment</a>
+            <table class="table table-bordered table-striped table-hover">
+                <!-- Table Header -->
+                <thead>
+                    <tr>
+                        <th class="text-center">Course</th> 
+                        <th class="text-center">Name</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Due Date</th>
+                        <th class="text-center">Edit</th>
+                        <th class="text-center">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (let count = 0; count < AssignmentList.length; count++) { %>
+                        <tr>
+                            <td class="text-center"><%= AssignmentList[count].Course %></td> 
+                            <td class="text-center"><%= AssignmentList[count].Name %></td>
+                            <td class="text-center"><%= AssignmentList[count].Status %></td>
+                            <td class="text-center"><%= AssignmentList[count].Due %></td>
+                            <td class="text-center">
+                                <a href="/tracker/edit/<%= AssignmentList[count]._id %>" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-pencil-alt"></i>Edit
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a href="/tracker/delete/<%= AssignmentList[count]._id %>" class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash-alt"></i>Delete
+                                </a>
+                            </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+<% include ../Partials/footer.ejs %>

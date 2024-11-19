@@ -1,9 +1,89 @@
 <% include Partials/header.ejs %>
 <% include Partials/main_nav.ejs %>
 <!--Main Content-->
-  <h1><%= title %></h1>
-  <p>Welcome to <%= title %></p>
-  <!--<img src="/Assets/images/Capture.png"-->
+<div class="main">
+  <div class="calendar">
+    <div class="header">
+      <button id="prevBtn">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <div class="monthYear" id="monthYear"></div>
+      <button id="nextBtn">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+    <div class="days">
+      <div class="day">Sunday</div>
+      <div class="day">Monday</div>
+      <div class="day">Tuesday</div>
+      <div class="day">Wednesday</div>
+      <div class="day">Thursday</div>
+      <div class="day">Friday</div>
+      <div class="day">Saturday</div>
+    </div>
+    <div class="dates" id="dates"></div>
+  </div>
+</div>
+
+<script>
+  const monthYearElement = document.getElementById('monthYear');
+  const datesElement = document.getElementById('dates'); // Make sure this ID is correct in your HTML
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn'); // Correct typo from previous code
+
+  let currentDate = new Date();
+
+  const updateCalendar = () => {
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth();
+
+    const firstDay = new Date(currentYear, currentMonth, 1);
+    const lastDay = new Date(currentYear, currentMonth + 1, 0);
+    const totalDays = lastDay.getDate();
+    const firstDayIndex = firstDay.getDay();
+    const lastDayIndex = lastDay.getDay();
+
+    const monthYearString = currentDate.toLocaleString('default', {
+      month: 'long',
+      year: 'numeric',
+    });
+    monthYearElement.textContent = monthYearString;
+
+    let datesHTML = '';
+
+    for (let i = firstDayIndex; i > 0; i--) {
+      const prevDate = new Date(currentYear, currentMonth, -i + 1);
+      datesHTML += `<div class="date inactive">${prevDate.getDate()}</div>`;
+    }
+
+    for (let i = 1; i <= totalDays; i++) {
+      const date = new Date(currentYear, currentMonth, i);
+      const activeClass = date.toDateString() === new Date().toDateString() ? 'active' : '';
+      datesHTML += `<div class="date ${activeClass}">${i}</div>`;
+    }
+
+    for (let i = 1; i <= 6 - lastDayIndex; i++) {
+      const nextDate = new Date(currentYear, currentMonth + 1, i);
+      datesHTML += `<div class="date inactive">${nextDate.getDate()}</div>`;
+    }
+
+    datesElement.innerHTML = datesHTML;
+  };
+
+  prevBtn.addEventListener('click', () => {
+    currentDate.setMonth(currentDate.getMonth() - 1);
+    updateCalendar();
+  });
+
+  nextBtn.addEventListener('click', () => {
+    currentDate.setMonth(currentDate.getMonth() + 1);
+    updateCalendar();
+  });
+
+  updateCalendar();
+
+</script>
+
 <% include Partials/footer.ejs %>
 
     

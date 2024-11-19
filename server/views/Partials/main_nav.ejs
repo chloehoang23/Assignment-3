@@ -1,7 +1,9 @@
 <!--Nav Bar-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg custom-navbar">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/">INFR3120</a>
+      <a class="navbar-brand" href="/">
+        <img src="/Assets/images/logo.png" alt="logo">
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -13,42 +15,16 @@
             <% } else { %>
                 <a class="nav-link" href="/home">
             <% } %>
-              <i class="fa-solid fa-house"></i> Home</a>
+              Home</a>
           </li>
 
           <li class="nav-item">
-            <% if(title=='About Us') { %>
-            <a class="nav-link active" href="/about">
+            <% if(title=='Assignments') { %>
+            <a class="nav-link active"  href="/tracker">
             <% } else { %>
-                <a class="nav-link" href="/about">
+                <a class="nav-link" href="/tracker">
             <% } %>
-              <i class="fa-solid fa-info"></i> About Us</a>
-          </li>
-
-          <li class="nav-item">
-            <% if(title=='Product') { %>
-              <a class="nav-link active" href="/product">
-            <% } else { %>
-                <a class="nav-link" href="/product">
-            <% } %>
-              <i class="fa-brands fa-elementor"></i> Product</a>
-          </li>
-
-          <li class="nav-item">
-            <% if(title=='Services') { %>
-              <a class="nav-link active" href="/service">
-            <% } else { %>
-              <a class="nav-link" href="/service">
-            <% } %>
-              <i class="fa-solid fa-gears"></i> Services</a>
-          </li>
-          <li class="nav-item">
-            <% if(title=='Books') { %>
-            <a class="nav-link active"  href="/bookslist">
-            <% } else { %>
-                <a class="nav-link" href="/bookslist">
-            <% } %>
-              <i class="fa-solid fa-book"></i> Books</a>
+              Assignments</a>
           </li>
           <li class="nav-item">
             <% if(title=='Contact Us') { %>
@@ -56,7 +32,7 @@
             <% } else { %>
               <a class="nav-link" href="/contact">
             <% } %>
-              <i class="fa-solid fa-phone"></i> Contact Us</a>
+              Contact Us</a>
           </li>
         </ul>
       </div>

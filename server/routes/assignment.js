@@ -1,52 +1,51 @@
 var express = require('express');
 var router = express.Router();
-let Book = require('../model/book')
+let Assignment = require('../model/assignment')
 /*CRUD*/
-/*Read Operation --> Get route for the book list*/
+/*Read Operation --> Get route for the assignment list*/
 router.get('/',async(req,res,next)=>{
     try{
-        const BookList = await Book.find();
-        res.render('Book/list',{
-            title:'Books', 
-            BookList:BookList
+        const AssignmentList = await Assignment.find();
+        res.render('Assignment/list',{
+            title:'Assignments', 
+            AssignmentList:AssignmentList
         })
     }
     catch(err){
         console.error(err)
-        res.render('Book/list',{
+        res.render('Assignment/list',{
             error:'Error on Server'})
     }
 })
-/*Create Operation --> Get route for Add book*/
+/*Create Operation --> Get route for Add assignment*/
 router.get('/add',async(req,res,next)=>{
     try{
-        res.render('Book/add',{
-            title:"Add Book"
+        res.render('Assignment/add',{
+            title:"Add Assignment"
         });
     }
     catch(err){
         console.error(err)
-        res.render('Book/list',{
+        res.render('Assignment/list',{
             error:'Error on Server'})
     }
 });
 /*Create Operation --> Post route for processing the Add page*/
 router.post('/add',async(req,res,next)=>{
     try{
-        let newBook = Book({
+        let newAssignment = Assignment({
+        "Course":req.body.Course,
         "Name":req.body.Name,
-        "Author":req.body.Author,
-        "Published":req.body.Published,
-        "Description":req.body.Description,
-        "Price":req.body.Price
+        "Status":req.body.Status,
+        "Due":req.body.Due
         })
-        Book.create(newBook).then(()=>{
-            res.redirect('/bookslist')
+        Assignment.create(newAssignment).then(()=>{
+            res.redirect('/tracker')
         })
     }
     catch(err){
         console.error(err)
-        res.render('Book/list',{
+        res.render('Assignment/list',{
             error:'Error on Server'})
     }
 });
@@ -54,11 +53,11 @@ router.post('/add',async(req,res,next)=>{
 router.get('/edit/:id',async(req,res,next)=>{
     try{
         const id = req.params.id;
-        const BookToEdit = await Book.findById(id);
-        res.render('Book/edit',
+        const AssignmentToEdit = await Assignment.findById(id);
+        res.render('Assignment/edit',
             {
-                title:'Edit Book',
-                Book:BookToEdit
+                title:'Edit Assignment',
+                Assignment:AssignmentToEdit
             }
         )
     }
@@ -71,21 +70,20 @@ router.get('/edit/:id',async(req,res,next)=>{
 router.post('/edit/:id',async(req,res,next)=>{
     try{
         let id = req.params.id;
-        let updatedBook = Book({
+        let updatedAssignment = Assignment({
             "_id":id,
+            "Course":req.body.Course,
             "Name":req.body.Name,
-            "Author":req.body.Author,
-            "Published":req.body.Published,
-            "Description":req.body.Description,
-            "Price":req.body.Price
+            "Status":req.body.Status,
+            "Due":req.body.Due
         })
-        Book.findByIdAndUpdate(id,updatedBook).then(()=>{
-            res.redirect('/bookslist')
+        Assignment.findByIdAndUpdate(id,updatedAssignment).then(()=>{
+            res.redirect('/tracker')
         })
     }
     catch(err){
         console.error(err);
-        res.render('Book/list',{
+        res.render('Assignment/list',{
             error:'Error on server'
         })
     }
@@ -94,13 +92,13 @@ router.post('/edit/:id',async(req,res,next)=>{
 router.get('/delete/:id',(req,res,next)=>{
     try{
         let id=req.params.id;
-        Book.deleteOne({_id:id}).then(()=>{
-            res.redirect('/bookslist')
+        Assignment.deleteOne({_id:id}).then(()=>{
+            res.redirect('/tracker')
         })
     }
     catch(err){
         console.error(err);
-        res.render('Book/list',{
+        res.render('Assignment/list',{
             error:'Error on server'
         })
     }

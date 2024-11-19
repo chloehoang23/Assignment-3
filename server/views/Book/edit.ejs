@@ -1,0 +1,42 @@
+<% include ../Partials/header.ejs %>
+<% include ../Partials/main_nav.ejs %>
+<div class="container">
+    <div class="row">
+        <div class="offset-md-3 col-md-6">
+            <h1><%= title %></h1>
+            <form class="form" method="POST">
+                <div class="form-group">
+                    <label for="nameTextField">Book Title</label>
+                    <input type="text" class="form-control" id="nameTextField" 
+                    placeholder="Enter the Book Title" name="Name" value="<%= Book.Name %>" required>
+                </div>
+                <div class="form-group">
+                    <label for="authorTextField">Book Author</label>
+                    <input type="text" class="form-control" id="authorTextField" 
+                    placeholder="Enter the Book Author" name="Author" value="<%= Book.Author %>" required>
+                </div>
+                <div class="form-group">
+                    <label for="publishedTextField">Book Published</label>
+                    <input type="text" class="form-control" id="publishedTextField" 
+                    placeholder="Enter the Book's Publication" name="Published" value="<%= Book.Published %>" required>
+                </div>
+                <div class="form-group">
+                    <label for="descriptionTextField">Book Description</label>
+                    <textarea type="text" class="form-control" id="descriptionTextField" 
+                    placeholder="Enter the Book's Description" name="Description" required><%= Book.Description %>"</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="priceTextField">Book's Price</label>
+                    <input type="text" class="form-control" id="priceTextField" 
+                    placeholder="Enter the Book's Price" name="Price" value="<%= Book.Price %>" required>
+                </div>
+        <button class="btn btn-primary" type="submit">
+            <i class="fas fa-edit"></i>
+            Submit</button>
+        <a href="/bookslist" class="btn btn-warning">
+            <i class="fas fa-undo"></i>Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+<% include ../Partials/footer.ejs %>

@@ -5,12 +5,16 @@
   overflow: hidden;
 }
 
+
+/* Background Colour */
 body {
   background-color: #d3d1e8 !important;
 }
 
+
+/* Nav Bar */
 .custom-navbar {
-  background-color: #363E59 ;
+  background-color: #363E59;
 }
 
 .navbar .nav-item a {
@@ -21,11 +25,15 @@ body {
   color: white !important;
 }
 
+
+/* Logo */
 img {
   width: 13%;
   height: auto;
 }
 
+
+/* Home Page*/
 .main {
   min-height: 100vh;
   display: flex;
@@ -117,6 +125,16 @@ img {
 }
 
 
+/* Assignment Page */
+.container i {
+  margin-right: 8px;
+}
+
+.fas fa-plus-circle {
+  margin-bottom: 5px;
+}
+
+/* Footer */
 footer {
   text-align: center;
 }

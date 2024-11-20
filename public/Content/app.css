@@ -2,34 +2,71 @@
 
 *{
   font-family: "Comic Neue", sans-serif;
-  overflow: hidden;
+  
 }
 
 
 /* Background Colour */
 body {
   background-color: #d3d1e8 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 
 /* Nav Bar */
-.custom-navbar {
+.d-flex {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 20%;
   background-color: #363E59;
+  color: rgb(185, 184, 184);
+  padding: 20px;
+  position: fixed;
+  top:0;
+  height: 100%;
+  overflow-y: auto; 
 }
 
-.navbar .nav-item a {
-  color: rgb(185, 184, 184) !important;
+.custom-sidebar .navbar-brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.navbar .nav-item a:hover {
-  color: white !important;
-}
-
-
-/* Logo */
-img {
-  width: 13%;
+.custom-sidebar .navbar-brand img {
+  max-width: 70%;
   height: auto;
+}
+
+.sidebar .nav-link {
+  color: rgb(185, 184, 184);
+  margin: 10px 0;
+  display: block;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.sidebar .nav-link.active {
+  background-color: rgb(122, 121, 121);
+  color: rgb(185, 184, 184);
+}
+
+.sidebar .nav-link:hover {
+  background-color: rgb(122, 121, 121);
+  color: rgb(185, 184, 184);
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: rgb(185, 184, 184);
+}
+
+.sidebar a:hover {
+  color: white;
 }
 
 
@@ -42,7 +79,7 @@ img {
 }
 
 .calendar {
-  width: 80%;
+  width: 70%;
   height: 100%;
   display:flex;
   flex-direction: column;
@@ -50,7 +87,7 @@ img {
   background: white;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0,0,0,3);
-  margin-top: -150px;
+  margin-left: 20%;
 }
 
 .header {
@@ -102,6 +139,7 @@ img {
   align-items: center;
   justify-content: center;
   text-align: center;
+  position: relative;
   padding: 10px;
   margin: auto;
   cursor: pointer;
@@ -126,6 +164,11 @@ img {
 
 
 /* Assignment Page */
+.container {
+  margin-top: 5%;
+  margin-left: 15% !important;
+}
+
 .container i {
   margin-right: 8px;
 }
@@ -133,6 +176,13 @@ img {
 .fas fa-plus-circle {
   margin-bottom: 5px;
 }
+
+
+/* Profile Page */
+.profile h6 {
+  font-size: 50px;
+}
+
 
 /* Footer */
 footer {
@@ -143,13 +193,14 @@ footer .navbar {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 20%;
   height: 60px;
 }
 
 footer .custom-navbar {
-  background-color: #363E59 ;
+  background-color: #d3d1e8;
 }
 
 footer h6 {
-  color: rgb(185, 184, 184) !important;
+  color: black;
 }

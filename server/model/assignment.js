@@ -5,7 +5,7 @@ let assignmentModel = mongoose.Schema({
     Course:String,
     Name:String,
     Status:String,
-    Due:Date
+    Due:{type:Date, required:true}
 },
 {
     collection:"Assignments"

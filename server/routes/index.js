@@ -25,9 +25,9 @@ router.get('/home', function(req, res, next) {
   res.render('index', { title: 'Home' }); // Change 'index' to name of ejs applied
 });
 
-/* GET contact page. */
-router.get('/contact', function(req, res, next) {
-  res.render('index', { title: 'Contact Us' });
+/* GET profile page. */
+router.get('/profile', function(req, res, next) {
+  res.render('profile', { title: 'Profile' });
 });
 // get and post router of login.ejs
 router.get('/login', function(req,res,next){
@@ -59,7 +59,7 @@ router.post('/login',function(req,res,next){
       {
         return next(err)
       }
-      return res.redirect('/tracker')
+      return res.redirect('/home')
     })
   })(req,res,next)
 })
@@ -101,7 +101,7 @@ router.post('/register',function(req,res,next){
     }
     else{
       return passport.authenticate('local')(req,res,()=>{
-        res.redirect('tracker')
+        res.redirect('home')
       })
     }
   })

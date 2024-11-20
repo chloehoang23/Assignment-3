@@ -6,28 +6,23 @@ let userModel = require('../model/User')
 let User = userModel.User;
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Home' });
-});
+router.get('/', function(req,res,next){
+  if(!req.user)
+  {
+    res.render('auth/login',{
+      title:'Login',
+      message:req.flash('loginMessage'),
+      displayName:req.user ? req.user.displayName:''
+    })
+  }
+  else {
+    return res.redirect('/home');
+  }
+})
 
 /* GET home page. */
 router.get('/home', function(req, res, next) {
   res.render('index', { title: 'Home' }); // Change 'index' to name of ejs applied
-});
-
-/* GET about page. */
-router.get('/about', function(req, res, next) {
-  res.render('index', { title: 'About Us' });
-});
-
-/* GET product page. */
-router.get('/product', function(req, res, next) {
-  res.render('index', { title: 'Product' });
-});
-
-/* GET services page. */
-router.get('/service', function(req, res, next) {
-  res.render('index', { title: 'Services' });
 });
 
 /* GET contact page. */
@@ -45,7 +40,7 @@ router.get('/login', function(req,res,next){
     })
   }
   else {
-    return res.redirect('/');
+    return res.redirect('/home');
   }
 })
 router.post('/login',function(req,res,next){
@@ -80,7 +75,7 @@ router.get('/register',function(req,res,next){
   }
   else
   {
-    return res.redirect('/')
+    return res.redirect('/login')
   }
 })
 router.post('/register',function(req,res,next){
@@ -118,6 +113,6 @@ router.get('/logout',function(req,res,next){
       return next(err)
     }
   })
-  req.redirect('/')
+  req.redirect('/home')
 })
 module.exports = router;

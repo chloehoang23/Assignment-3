@@ -4,42 +4,55 @@
     <div class="row">
         <div class="offset-md-1 col-md-10">
             <h1 style="text-align: center; margin-top: 3%;"><%= title %></h1>
-            <a href="/tracker/add" class="btn btn-primary mb-2" role="button">
-                <i class="fas fa-plus-circle"></i>Add Assignment</a>
+            <% if(typeof displayName == 'string' && displayName) { %>
+                <a href="/tracker/add" class="btn btn-primary mb-2" role="button">
+                    <i class="fas fa-plus-circle"></i>Add Assignment</a>
+            <% } %>
             <table class="table table-bordered table-striped table-hover">
                 <!-- Table Header -->
-                <thead>
                     <tr>
                         <th class="text-center">Course</th> 
                         <th class="text-center">Name</th>
                         <th class="text-center">Status</th>
                         <th class="text-center">Due Date</th>
-                        <th class="text-center">Edit</th>
-                        <th class="text-center">Delete</th>
                     </tr>
-                </thead>
-                <tbody>
                     <% for (let count = 0; count < AssignmentList.length; count++) { %>
                         <tr>
-                            <td class="text-center"><%= AssignmentList[count].Course %></td> 
-                            <td class="text-center"><%= AssignmentList[count].Name %></td>
-                            <td class="text-center"><%= AssignmentList[count].Status %></td>
-                            <td class="text-center"><%= AssignmentList[count].Due %></td>
-                            <td class="text-center">
-                                <a href="/tracker/edit/<%= AssignmentList[count]._id %>" class="btn btn-primary btn-sm">
-                                    <i class="fas fa-pencil-alt"></i>Edit
-                                </a>
-                            </td>
-                            <td class="text-center">
-                                <a href="/tracker/delete/<%= AssignmentList[count]._id %>" class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash-alt"></i>Delete
-                                </a>
-                            </td>
-                        </tr>
-                    <% } %>
-                </tbody>
+                            <% if(typeof displayName == 'string' && displayName) { %>
+                                <td class="text-center"><%= AssignmentList[count].Course %></td> 
+                                <td class="text-center"><%= AssignmentList[count].Name %></td>
+                                <td class="text-center"><%= AssignmentList[count].Status %></td>
+                                <td class="text-center"><%= AssignmentList[count].Due %></td>
+                                <td class="text-center">
+                                    <a href="/tracker/edit/<%= AssignmentList[count]._id %>" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-pencil-alt"></i>Edit
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('<%= AssignmentList[count]._id %>')">
+                                        <i class="fas fa-trash-alt"></i>Delete</a>
+                                </td>
+                            <% } else { %>
+                                <td class="text-center"><%= AssignmentList[count].Course %></td> 
+                                <td class="text-center"><%= AssignmentList[count].Name %></td>
+                                <td class="text-center"><%= AssignmentList[count].Status %></td>
+                                <td class="text-center"><%= AssignmentList[count].Due %></td>
+                            <% } %>
+                    </tr>
+                <% } %>
             </table>
         </div>
     </div>
 </main>
+
+<!-- Reference: https://www.w3schools.com/js/js_window_location.asp -->
+<script>
+    function confirmDelete(id) {
+        const confirmation = confirm("Are you sure you want to delete this assignment?");
+        if (confirmation) {
+            window.location.href = "tracker/delete/" + id;
+        }
+    }
+</script>
+
 <% include ../Partials/footer.ejs %>

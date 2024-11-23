@@ -1,5 +1,5 @@
 # Assignment Tracker
-This project is a assignment tracker website developed as part of Assignment 3 for INFR3120 – Web and Scripting Programming course at Ontario Tech University. The website showcases CRUD operation and Authentication Operation using EJS, JS and CSS.
+This project is a assignment tracker website developed as part of Assignment 3 for INFR3120 – Web and Scripting Programming course at Ontario Tech University. The website showcases CRUD operation and Authentication Operation using EJS, JavaScript and CSS.
 
 
 

@@ -5,11 +5,10 @@ let DB = require('../config/db')
 let userModel = require('../model/User')
 let User = userModel.User;
 
-/* GET home page. */
 router.get('/', function(req,res,next){
   if(!req.user)
   {
-    res.render('auth/login',{
+    res.render('Auth/login',{
       title:'Login',
       message:req.flash('loginMessage'),
       displayName:req.user ? req.user.displayName:''
@@ -18,22 +17,24 @@ router.get('/', function(req,res,next){
   else {
     return res.redirect('/home');
   }
-})
+});
 
 /* GET home page. */
 router.get('/home', function(req, res, next) {
-  res.render('index', { title: 'Home' }); // Change 'index' to name of ejs applied
+  res.render('index', { title: 'Home', // Change 'index' to name of ejs applied
+  displayName:req.user ? req.user.displayName:'' });
 });
 
 /* GET profile page. */
-router.get('/profile', function(req, res, next) {
-  res.render('profile', { title: 'Profile' });
+router.get('/calendar', function(req, res, next) {
+  res.render('calendar', { title: 'Calendar',
+  displayName:req.user ? req.user.displayName:'' });
 });
 // get and post router of login.ejs
 router.get('/login', function(req,res,next){
   if(!req.user)
   {
-    res.render('auth/login',{
+    res.render('Auth/login',{
       title:'Login',
       message:req.flash('loginMessage'),
       displayName:req.user ? req.user.displayName:''
@@ -67,7 +68,7 @@ router.post('/login',function(req,res,next){
 router.get('/register',function(req,res,next){
   if(!req.user)
   {
-    res.render('auth/register',{
+    res.render('Auth/register',{
       title:'Register',
       message:req.flash('registerMessage'),
       displayName:req.user ? req.user.displayName:''
@@ -92,7 +93,7 @@ router.post('/register',function(req,res,next){
       {
         req.flash('registerMessage','Registration Error: User already exists');
       }
-      return res.render('auth/register',
+      return res.render('Auth/register',
       {
         title:'Register',
         message:req.flash('registerMessage'),
@@ -107,12 +108,12 @@ router.post('/register',function(req,res,next){
   })
 })
 router.get('/logout',function(req,res,next){
-  req.logout(function(err){
+  req.logOut(function(err){
     if(err)
     {
       return next(err)
     }
   })
-  req.redirect('/home')
+  res.redirect('/')
 })
 module.exports = router;

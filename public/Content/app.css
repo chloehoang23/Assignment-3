@@ -1,8 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,700;1,700&display=swap");
 
 *{
-  font-family: "Comic Neue", sans-serif;
-  
+  font-family: "Comic Neue", sans-serif;  
 }
 
 
@@ -11,6 +10,8 @@ body {
   background-color: #d3d1e8 !important;
   margin: 0 !important;
   padding: 0 !important;
+  overflow-x: hidden;
+
 }
 
 
@@ -70,7 +71,23 @@ body {
 }
 
 
-/* Home Page*/
+/* Home Page */
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20%;
+  height: 100vh;
+  text-align: center;
+}
+
+.home h1 {
+  margin: 0;
+  font-size: 500%;
+}
+
+/* Calendar Page*/
 .main {
   min-height: 100vh;
   display: flex;
@@ -166,7 +183,8 @@ body {
 /* Assignment Page */
 .container {
   margin-top: 5%;
-  margin-left: 15% !important;
+  margin-left: 16% !important;
+  margin-bottom: 10%;
 }
 
 .container i {
@@ -176,13 +194,6 @@ body {
 .fas fa-plus-circle {
   margin-bottom: 5px;
 }
-
-
-/* Profile Page */
-.profile h6 {
-  font-size: 50px;
-}
-
 
 /* Footer */
 footer {

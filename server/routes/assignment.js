@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 let Assignment = require('../model/assignment')
+// Reference: https://momentjs.com/
+const moment = require('moment');
 /*CRUD*/
 /*Read Operation --> Get route for the assignment list*/
 router.get('/',async(req,res,next)=>{
@@ -8,6 +10,7 @@ router.get('/',async(req,res,next)=>{
         const AssignmentList = await Assignment.find();
         res.render('Assignment/list',{
             title:'Assignments', 
+            displayName:req.user ? req.user.displayName:'',
             AssignmentList:AssignmentList
         })
     }
@@ -20,8 +23,12 @@ router.get('/',async(req,res,next)=>{
 /*Create Operation --> Get route for Add assignment*/
 router.get('/add',async(req,res,next)=>{
     try{
+        // Reference: https://momentjs.com/
+        const defaultDueDate = moment().endOf('day').format('YYYY-MM-DDTHH:mm');
         res.render('Assignment/add',{
-            title:"Add Assignment"
+            title:"Add Assignment",
+            displayName:req.user ? req.user.displayName:'',
+            defaultDueDate: defaultDueDate
         });
     }
     catch(err){
@@ -33,13 +40,20 @@ router.get('/add',async(req,res,next)=>{
 /*Create Operation --> Post route for processing the Add page*/
 router.post('/add',async(req,res,next)=>{
     try{
+        let dueDate = req.body.Due;
+
+        // Reference: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/datetime-local
+        if (dueDate && !dueDate.includes('T')) {
+            dueDate = `${dueDate}T23:59`;
+        }
+
         let newAssignment = Assignment({
         "Course":req.body.Course,
         "Name":req.body.Name,
         "Status":req.body.Status,
-        "Due":req.body.Due
+        "Due":dueDate
         })
-        Assignment.create(newAssignment).then(()=>{
+        await Assignment.create(newAssignment).then(()=>{
             res.redirect('/tracker')
         })
     }
@@ -53,10 +67,17 @@ router.post('/add',async(req,res,next)=>{
 router.get('/edit/:id',async(req,res,next)=>{
     try{
         const id = req.params.id;
+        let dueDate = req.body.Due;
+
+        // Ensure time is 23:59 if only date is provided
+        if (dueDate && !dueDate.includes('T')) {
+            dueDate = `${dueDate}T23:59`;
+        }
         const AssignmentToEdit = await Assignment.findById(id);
         res.render('Assignment/edit',
             {
                 title:'Edit Assignment',
+                displayName:req.user ? req.user.displayName:'',
                 Assignment:AssignmentToEdit
             }
         )
@@ -103,4 +124,5 @@ router.get('/delete/:id',(req,res,next)=>{
         })
     }
 });
+
 module.exports = router;
